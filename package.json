@@ -1,0 +1,41 @@
+{
+  "name": "saucedemo-playwright-framework",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Playwright + TypeScript test automation framework (UI + API) with Page Object Model, module-wise reporting and a QA process",
+  "license": "MIT",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:smoke": "node scripts/run-regression.js --priority High",
+    "test:regression": "node scripts/run-regression.js",
+    "test:auth": "playwright test tests/auth",
+    "test:inventory": "playwright test tests/inventory",
+    "test:cart": "playwright test tests/cart",
+    "test:checkout": "playwright test tests/checkout",
+    "test:api": "playwright test tests/api",
+    "cases:csv": "node scripts/export-test-cases.js",
+    "cases:check": "node scripts/export-test-cases.js --check",
+    "signoff": "node scripts/signoff.js",
+    "typecheck": "tsc --noEmit -p .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"{api,components,config,fixtures,pages,test-data,utils,tests,reporters}/**/*.ts\" playwright.config.ts eslint.config.mjs",
+    "format:check": "prettier --check \"{api,components,config,fixtures,pages,test-data,utils,tests,reporters}/**/*.ts\" playwright.config.ts eslint.config.mjs",
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm run cases:check",
+    "reports": "node scripts/open-reports.js",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.65.1",
+    "@types/node": "^26.6.6",
+    "dotenv": "^18.0.10",
+    "eslint": "^10.15.0",
+    "eslint-plugin-playwright": "^2.12.2",
+    "prettier": "^3.10.1",
+    "typescript": ">=6.0.0 <6.1.0",
+    "typescript-eslint": "^8.73.0"
+  }
+}

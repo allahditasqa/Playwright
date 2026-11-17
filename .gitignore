@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Local settings and saved login session
+.env
+.env.*
+!.env.example
+.auth/
+
+# Test output (generated on every run; CI uploads it as an artifact)
+reports/
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/tasks.json
+.idea/
