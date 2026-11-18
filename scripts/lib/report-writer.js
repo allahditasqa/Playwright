@@ -70,10 +70,6 @@ function actualResult(r) {
  */
 function writeRun(run) {
   const cases = loadCases();
-  const d = run.startedAt;
-  const time = stamp(d);
-  const date = `${two(d.getDate())}-${two(d.getMonth() + 1)}-${d.getFullYear()}`;
-  const clock = `${two(d.getHours())}:${two(d.getMinutes())}:${two(d.getSeconds())}`;
   const reportsDir = path.resolve(run.reportsDir);
 
   // group the results by module (taken from the document of each case)
@@ -84,6 +80,15 @@ function writeRun(run) {
     if (!modules.has(name)) modules.set(name, { name, slug: slugify(name), rows: [] });
     modules.get(name).rows.push({ ...r, c });
   }
+
+  // An old report is never overwritten: when a file of this second already exists, move to the next second.
+  let d = new Date(run.startedAt);
+  const taken = (when) =>
+    [...modules.values()].some((m) => fs.existsSync(path.join(reportsDir, m.slug, `${m.name} test ${stamp(when)}.html`)));
+  while (taken(d)) d = new Date(d.getTime() + 1000);
+  const time = stamp(d);
+  const date = `${two(d.getDate())}-${two(d.getMonth() + 1)}-${d.getFullYear()}`;
+  const clock = `${two(d.getHours())}:${two(d.getMinutes())}:${two(d.getSeconds())}`;
 
   const written = [];
   const entries = [];
