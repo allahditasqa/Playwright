@@ -7,7 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
-const { parseCsv } = require('./export-test-cases.js');
+const { parseCsv, slugify } = require('./lib/test-cases');
 
 const DOCS = path.resolve(__dirname, '..', 'docs', 'test-cases');
 const args = process.argv.slice(2);
@@ -27,10 +27,10 @@ const modules = new Set();
 for (const file of fs.readdirSync(DOCS).filter((f) => f.endsWith('.csv'))) {
   const [, ...rows] = parseCsv(fs.readFileSync(path.join(DOCS, file), 'utf8'));
   for (const r of rows) {
-    // columns: 0 ID, 1 Module, 5 Priority, 10 Regression
-    if (r[10] !== 'Yes') continue;
+    // columns: 0 ID, 1 Module, 5 Priority, 14 Regression
+    if (r[14] !== 'Yes') continue;
     if (priority && r[5] !== priority) continue;
-    if (moduleName && r[1] !== moduleName) continue;
+    if (moduleName && slugify(r[1]) !== moduleName) continue;
     ids.push(r[0]);
     modules.add(r[1]);
   }

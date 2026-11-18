@@ -1,6 +1,7 @@
 # Inventory - Products Test Cases
 
-**Automation:** `tests/inventory/products.spec.ts`  |  **Report:** `reports/inventory/products test <DD-MM-YYYY>_<HH-mm>.html` (all reports: `reports/index.html`)
+**Module:** Inventory | **Sub-module:** Products | **Spec:** `tests/inventory/products.spec.ts`
+**Report:** `reports/<module>/<Module Name> test <DD-MM-YYYY>_<HH-mm-ss>.html` (all runs: `reports/index.html`)  |  **Master CSV:** `docs/test-cases/inventory-products.csv`
 
 ## Overview
 The products page lists the shop items. The user can sort them, add or remove them from the cart and open their details.
@@ -38,6 +39,23 @@ The products page lists the shop items. The user can sort them, add or remove th
 | --- | --- | --- | --- | --- | --- |
 | TC_PRODUCTS_09 | Open "Sauce Labs Backpack" and check its details page shows the name and price $29.99 | Medium | User is logged in | 1. Click the product name "Sauce Labs Backpack". | The details page opens and shows the name and the price $29.99. |
 | TC_PRODUCTS_10 | Open a product and click "Back to products" and check the products page opens | Low | User is logged in | 1. Open a product. 2. Click "Back to products". | The products page opens. |
+
+## Traceability
+
+Every case is automated. Requirement IDs are listed in [TEST_STRATEGY.md](../TEST_STRATEGY.md).
+
+| ID | Type | Test data | Automation | Spec file | Requirement |
+| --- | --- | --- | --- | --- | --- |
+| TC_PRODUCTS_01 | Functional | Six products with the names and prices in test-data | Automated | `tests/inventory/products.spec.ts` | REQ-INV-01 |
+| TC_PRODUCTS_02 | Functional | Sort option "Name (A to Z)" | Automated | `tests/inventory/products.spec.ts` | REQ-INV-02 |
+| TC_PRODUCTS_03 | Functional | Sort option "Name (Z to A)" | Automated | `tests/inventory/products.spec.ts` | REQ-INV-02 |
+| TC_PRODUCTS_04 | Functional | Sort option "Price (low to high)" | Automated | `tests/inventory/products.spec.ts` | REQ-INV-02 |
+| TC_PRODUCTS_05 | Functional | Sort option "Price (high to low)" | Automated | `tests/inventory/products.spec.ts` | REQ-INV-02 |
+| TC_PRODUCTS_06 | Functional | Product "Sauce Labs Backpack" | Automated | `tests/inventory/products.spec.ts` | REQ-INV-03 |
+| TC_PRODUCTS_07 | Functional | Products "Sauce Labs Backpack" and "Sauce Labs Bike Light" | Automated | `tests/inventory/products.spec.ts` | REQ-INV-03 |
+| TC_PRODUCTS_08 | Functional | Product "Sauce Labs Backpack" | Automated | `tests/inventory/products.spec.ts` | REQ-INV-03 |
+| TC_PRODUCTS_09 | Functional | Product "Sauce Labs Backpack", price $29.99 | Automated | `tests/inventory/products.spec.ts` | REQ-INV-04 |
+| TC_PRODUCTS_10 | Functional (navigation) | Any product | Automated | `tests/inventory/products.spec.ts` | REQ-INV-04 |
 
 ## Summary
 

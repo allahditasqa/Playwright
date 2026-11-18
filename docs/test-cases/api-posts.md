@@ -1,6 +1,7 @@
 # API - Posts Test Cases
 
-**Automation:** `tests/api/posts.spec.ts`  |  **Report:** `reports/api/posts test <DD-MM-YYYY>_<HH-mm>.html` (all reports: `reports/index.html`)
+**Module:** API | **Sub-module:** Posts | **Spec:** `tests/api/posts.spec.ts`
+**Report:** `reports/<module>/<Module Name> test <DD-MM-YYYY>_<HH-mm-ss>.html` (all runs: `reports/index.html`)  |  **Master CSV:** `docs/test-cases/api-posts.csv`
 
 ## Overview
 REST API tests against the public JSONPlaceholder service (https://jsonplaceholder.typicode.com). No browser is used.
@@ -25,6 +26,21 @@ REST API tests against the public JSONPlaceholder service (https://jsonplacehold
 | TC_POSTS_06 | POST /posts with title "foo", body "bar" and userId 1 returns status 201 and the new id 101 | High | None | 1. Send POST /posts with title `foo`, body `bar` and userId 1. | Status 201. The answer contains the sent data and the new id 101. |
 | TC_POSTS_07 | PUT /posts/1 with the title "updated title" returns status 200 and the new title | Medium | None | 1. Send PUT /posts/1 with the title `updated title`. | Status 200 and the title is `updated title`. |
 | TC_POSTS_08 | DELETE /posts/1 returns status 200 | Medium | None | 1. Send DELETE /posts/1. | Status 200. |
+
+## Traceability
+
+Every case is automated. Requirement IDs are listed in [TEST_STRATEGY.md](../TEST_STRATEGY.md).
+
+| ID | Type | Test data | Automation | Spec file | Requirement |
+| --- | --- | --- | --- | --- | --- |
+| TC_POSTS_01 | API / Functional | GET /posts | Automated | `tests/api/posts.spec.ts` | JSONPlaceholder guide: Listing all resources |
+| TC_POSTS_02 | API / Functional | GET /posts/1 | Automated | `tests/api/posts.spec.ts` | JSONPlaceholder guide: Getting a resource |
+| TC_POSTS_03 | API / Functional | GET /posts?userId=1 | Automated | `tests/api/posts.spec.ts` | JSONPlaceholder guide: Filtering resources |
+| TC_POSTS_04 | API / Functional | GET /posts/1/comments | Automated | `tests/api/posts.spec.ts` | JSONPlaceholder guide: Listing nested resources |
+| TC_POSTS_05 | API / Negative | GET /posts/9999 | Automated | `tests/api/posts.spec.ts` | JSONPlaceholder guide: Getting a resource |
+| TC_POSTS_06 | API / Functional | POST /posts, body {title: foo, body: bar, userId: 1} | Automated | `tests/api/posts.spec.ts` | JSONPlaceholder guide: Creating a resource |
+| TC_POSTS_07 | API / Functional | PUT /posts/1, body {title: updated title} | Automated | `tests/api/posts.spec.ts` | JSONPlaceholder guide: Updating a resource |
+| TC_POSTS_08 | API / Functional | DELETE /posts/1 | Automated | `tests/api/posts.spec.ts` | JSONPlaceholder guide: Deleting a resource |
 
 ## Summary
 

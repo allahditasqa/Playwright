@@ -1,0 +1,124 @@
+[
+  {
+    "RunId": "20261118-123758",
+    "StartedAt": "2026-11-18T07:37:58.659Z",
+    "Tool": "Playwright",
+    "Browser": "Chromium (Desktop Chrome)",
+    "Environment": "https://www.saucedemo.com (UI), https://jsonplaceholder.typicode.com (API)",
+    "DurationSeconds": 46,
+    "Modules": [
+      {
+        "Module": "API",
+        "ReportPath": "api/API test 18-11-2026_12-37-58.html",
+        "CsvPath": "api/API test cases 18-11-2026_12-37-58.csv",
+        "Total": 8,
+        "Passed": 8,
+        "Failed": 0,
+        "Skipped": 0,
+        "KnownDefects": 0,
+        "Results": {
+          "TC_POSTS_01": "passed",
+          "TC_POSTS_02": "passed",
+          "TC_POSTS_03": "passed",
+          "TC_POSTS_04": "passed",
+          "TC_POSTS_05": "passed",
+          "TC_POSTS_06": "passed",
+          "TC_POSTS_07": "passed",
+          "TC_POSTS_08": "passed"
+        },
+        "DurationSeconds": 2.2
+      },
+      {
+        "Module": "Auth",
+        "ReportPath": "auth/Auth test 18-11-2026_12-37-58.html",
+        "CsvPath": "auth/Auth test cases 18-11-2026_12-37-58.csv",
+        "Total": 15,
+        "Passed": 15,
+        "Failed": 0,
+        "Skipped": 0,
+        "KnownDefects": 0,
+        "Results": {
+          "TC_LOGIN_01": "passed",
+          "TC_LOGIN_02": "passed",
+          "TC_LOGIN_03": "passed",
+          "TC_LOGIN_04": "passed",
+          "TC_LOGIN_05": "passed",
+          "TC_LOGIN_06": "passed",
+          "TC_LOGIN_07": "passed",
+          "TC_LOGIN_08": "passed",
+          "TC_LOGIN_09": "passed",
+          "TC_LOGIN_10": "passed",
+          "TC_LOGIN_11": "passed",
+          "TC_LOGIN_12": "passed",
+          "TC_LOGIN_13": "passed",
+          "TC_LOGIN_14": "passed",
+          "TC_LOGIN_15": "passed"
+        },
+        "DurationSeconds": 26.8
+      },
+      {
+        "Module": "Cart",
+        "ReportPath": "cart/Cart test 18-11-2026_12-37-58.html",
+        "CsvPath": "cart/Cart test cases 18-11-2026_12-37-58.csv",
+        "Total": 5,
+        "Passed": 5,
+        "Failed": 0,
+        "Skipped": 0,
+        "KnownDefects": 0,
+        "Results": {
+          "TC_CART_01": "passed",
+          "TC_CART_02": "passed",
+          "TC_CART_03": "passed",
+          "TC_CART_04": "passed",
+          "TC_CART_05": "passed"
+        },
+        "DurationSeconds": 25.3
+      },
+      {
+        "Module": "Checkout",
+        "ReportPath": "checkout/Checkout test 18-11-2026_12-37-58.html",
+        "CsvPath": "checkout/Checkout test cases 18-11-2026_12-37-58.csv",
+        "Total": 9,
+        "Passed": 9,
+        "Failed": 0,
+        "Skipped": 0,
+        "KnownDefects": 0,
+        "Results": {
+          "TC_CHECKOUT_01": "passed",
+          "TC_CHECKOUT_02": "passed",
+          "TC_CHECKOUT_03": "passed",
+          "TC_CHECKOUT_04": "passed",
+          "TC_CHECKOUT_05": "passed",
+          "TC_CHECKOUT_06": "passed",
+          "TC_CHECKOUT_07": "passed",
+          "TC_CHECKOUT_08": "passed",
+          "TC_CHECKOUT_09": "passed"
+        },
+        "DurationSeconds": 22.5
+      },
+      {
+        "Module": "Inventory",
+        "ReportPath": "inventory/Inventory test 18-11-2026_12-37-58.html",
+        "CsvPath": "inventory/Inventory test cases 18-11-2026_12-37-58.csv",
+        "Total": 10,
+        "Passed": 10,
+        "Failed": 0,
+        "Skipped": 0,
+        "KnownDefects": 0,
+        "Results": {
+          "TC_PRODUCTS_01": "passed",
+          "TC_PRODUCTS_02": "passed",
+          "TC_PRODUCTS_03": "passed",
+          "TC_PRODUCTS_04": "passed",
+          "TC_PRODUCTS_05": "passed",
+          "TC_PRODUCTS_06": "passed",
+          "TC_PRODUCTS_07": "passed",
+          "TC_PRODUCTS_08": "passed",
+          "TC_PRODUCTS_09": "passed",
+          "TC_PRODUCTS_10": "passed"
+        },
+        "DurationSeconds": 22.3
+      }
+    ]
+  }
+]

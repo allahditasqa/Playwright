@@ -1,6 +1,7 @@
 # Checkout Test Cases
 
-**Automation:** `tests/checkout/checkout.spec.ts`  |  **Report:** `reports/checkout/checkout test <DD-MM-YYYY>_<HH-mm>.html` (all reports: `reports/index.html`)
+**Module:** Checkout | **Sub-module:** Checkout | **Spec:** `tests/checkout/checkout.spec.ts`
+**Report:** `reports/<module>/<Module Name> test <DD-MM-YYYY>_<HH-mm-ss>.html` (all runs: `reports/index.html`)  |  **Master CSV:** `docs/test-cases/checkout-checkout.csv`
 
 ## Overview
 The checkout has three steps: your information, overview, complete. This is the end-to-end purchase flow.
@@ -32,6 +33,22 @@ The checkout has three steps: your information, overview, complete. This is the 
 | ID | Title | Priority | Preconditions | Steps | Expected result |
 | --- | --- | --- | --- | --- | --- |
 | TC_CHECKOUT_09 | Add "Sauce Labs Bike Light" too and check the item total is the sum of both prices | Medium | User is logged in and "Sauce Labs Backpack" is in the cart. The checkout "Your Information" step is open | 1. Go to the products page and add "Sauce Labs Bike Light". 2. Open the cart and click Checkout. 3. Fill the information and click Continue. | The item total is $39.98 (29.99 + 9.99). |
+
+## Traceability
+
+Every case is automated. Requirement IDs are listed in [TEST_STRATEGY.md](../TEST_STRATEGY.md).
+
+| ID | Type | Test data | Automation | Spec file | Requirement |
+| --- | --- | --- | --- | --- | --- |
+| TC_CHECKOUT_01 | Functional / E2E | First name Ada, last name Lovelace, postal code 12345 | Automated | `tests/checkout/checkout.spec.ts` | REQ-CHK-01 |
+| TC_CHECKOUT_02 | Negative / Validation | First name empty, last name Lovelace, postal code 12345 | Automated | `tests/checkout/checkout.spec.ts` | REQ-CHK-01 |
+| TC_CHECKOUT_03 | Negative / Validation | First name Ada, last name empty, postal code 12345 | Automated | `tests/checkout/checkout.spec.ts` | REQ-CHK-01 |
+| TC_CHECKOUT_04 | Negative / Validation | First name Ada, last name Lovelace, postal code empty | Automated | `tests/checkout/checkout.spec.ts` | REQ-CHK-01 |
+| TC_CHECKOUT_05 | Functional (navigation) | None | Automated | `tests/checkout/checkout.spec.ts` | REQ-CHK-01 |
+| TC_CHECKOUT_06 | Functional / E2E | Product "Sauce Labs Backpack", customer Ada Lovelace 12345 | Automated | `tests/checkout/checkout.spec.ts` | REQ-CHK-02 |
+| TC_CHECKOUT_07 | Functional (calculation) | Product "Sauce Labs Backpack", price $29.99 | Automated | `tests/checkout/checkout.spec.ts` | REQ-CHK-03 |
+| TC_CHECKOUT_08 | Functional / E2E | Product "Sauce Labs Backpack", customer Ada Lovelace 12345 | Automated | `tests/checkout/checkout.spec.ts` | REQ-CHK-02 |
+| TC_CHECKOUT_09 | Functional (calculation) | Products "Sauce Labs Backpack" and "Sauce Labs Bike Light" | Automated | `tests/checkout/checkout.spec.ts` | REQ-CHK-03 |
 
 ## Summary
 

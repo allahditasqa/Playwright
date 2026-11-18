@@ -7,8 +7,7 @@ node_modules/
 !.env.example
 .auth/
 
-# Test output (generated on every run; CI uploads it as an artifact)
-reports/
+# Test output. reports/ is NOT ignored: module-wise reports are committed (see README > Reports)
 playwright-report/
 test-results/
 blob-report/

@@ -1,6 +1,7 @@
 # Auth - Login Test Cases
 
-**Automation:** `tests/auth/login.spec.ts`  |  **Report:** `reports/auth/login test <DD-MM-YYYY>_<HH-mm>.html` (all reports: `reports/index.html`)
+**Module:** Auth | **Sub-module:** Login | **Spec:** `tests/auth/login.spec.ts`
+**Report:** `reports/<module>/<Module Name> test <DD-MM-YYYY>_<HH-mm-ss>.html` (all runs: `reports/index.html`)  |  **Master CSV:** `docs/test-cases/auth-login.csv`
 
 ## Overview
 The login page lets a user sign in with a username and a password. After a successful login the products page opens.
@@ -44,6 +45,28 @@ The login page lets a user sign in with a username and a password. After a succe
 | ID | Title | Priority | Preconditions | Steps | Expected result |
 | --- | --- | --- | --- | --- | --- |
 | TC_LOGIN_15 | Open /inventory.html without login and check the "must be logged in" message | High | User is logged out | 1. Open `/inventory.html` directly in the address bar. | The login page opens with the message "Epic sadface: You can only access '/inventory.html' when you are logged in." |
+
+## Traceability
+
+Every case is automated. Requirement IDs are listed in [TEST_STRATEGY.md](../TEST_STRATEGY.md).
+
+| ID | Type | Test data | Automation | Spec file | Requirement |
+| --- | --- | --- | --- | --- | --- |
+| TC_LOGIN_01 | Functional (UI) | None | Automated | `tests/auth/login.spec.ts` | REQ-AUTH-01 |
+| TC_LOGIN_02 | Functional (UI) | Any text typed in the password field | Automated | `tests/auth/login.spec.ts` | REQ-AUTH-01 |
+| TC_LOGIN_03 | Functional | Username standard_user, the public demo password | Automated | `tests/auth/login.spec.ts` | REQ-AUTH-02 |
+| TC_LOGIN_04 | Functional | Username standard_user, the public demo password | Automated | `tests/auth/login.spec.ts` | REQ-AUTH-02 |
+| TC_LOGIN_05 | Functional | Username standard_user, the public demo password | Automated | `tests/auth/login.spec.ts` | REQ-AUTH-03 |
+| TC_LOGIN_06 | Functional | Username standard_user, the public demo password | Automated | `tests/auth/login.spec.ts` | REQ-AUTH-03 |
+| TC_LOGIN_07 | Negative | Username locked_out_user, the public demo password | Automated | `tests/auth/login.spec.ts` | REQ-AUTH-04 |
+| TC_LOGIN_08 | Negative | Username standard_user, password wrong_password | Automated | `tests/auth/login.spec.ts` | REQ-AUTH-05 |
+| TC_LOGIN_09 | Negative | Username unknown_user, any password | Automated | `tests/auth/login.spec.ts` | REQ-AUTH-05 |
+| TC_LOGIN_10 | Negative / Validation | Username empty, password empty | Automated | `tests/auth/login.spec.ts` | REQ-AUTH-06 |
+| TC_LOGIN_11 | Negative / Validation | Username standard_user, password empty | Automated | `tests/auth/login.spec.ts` | REQ-AUTH-06 |
+| TC_LOGIN_12 | Negative / Boundary | Username STANDARD_USER (capital letters), the public demo password | Automated | `tests/auth/login.spec.ts` | REQ-AUTH-05 |
+| TC_LOGIN_13 | Security | Username ' OR '1'='1, the public demo password | Automated | `tests/auth/login.spec.ts` | REQ-AUTH-05 |
+| TC_LOGIN_14 | Functional (UI) | Username empty, password empty | Automated | `tests/auth/login.spec.ts` | REQ-AUTH-07 |
+| TC_LOGIN_15 | Security / Access control | URL /inventory.html | Automated | `tests/auth/login.spec.ts` | REQ-AUTH-08 |
 
 ## Summary
 

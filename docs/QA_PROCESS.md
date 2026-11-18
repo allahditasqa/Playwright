@@ -12,7 +12,7 @@ Each module goes through the same steps, and every step leaves a file in the rep
 | 2 | Test strategy / plan | Scope, approach, environment, data, entry and exit criteria, risks | [docs/TEST_STRATEGY.md](TEST_STRATEGY.md) |
 | 3 | Test design | Test cases in plain English, one standard format, design techniques | `docs/test-cases/<module>-<sub>.md` ([standard](TEST_CASE_STANDARD.md)) |
 | 4 | Automation | Page objects and spec files, only for stable, repeatable cases | `pages/`, `tests/<module>/<sub>.spec.ts` |
-| 5 | Execution | CSV of the cases before the run, report after the run, history | `reports/<module>/...` and `reports/index.html` |
+| 5 | Execution | module report and CSV with the real results after the run, history | `reports/<module>/...` and `reports/index.html` |
 | 6 | Defects / observations | Anything wrong or doubtful, with evidence | `docs/defects/<module>.md` ([template](templates/defect-log.md)) |
 | 7 | Sign-off | Final report: coverage, results, defects, risks, recommendation | `docs/signoff/<module> signoff <date>.md` |
 

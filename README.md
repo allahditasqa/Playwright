@@ -84,8 +84,9 @@ reporters/ · scripts/ · docs/     reporting, CSV and sign-off tooling, QA proc
 │   └── templates/        defect log and sign-off templates
 ├── fixtures/             test-fixtures.ts
 ├── pages/                BasePage, LoginPage, InventoryPage, ProductDetailsPage, CartPage, CheckoutPage
-├── reporters/            offline-report.ts (module-wise HTML, run CSV, history index)
-├── scripts/              export-test-cases, run-regression, signoff, open-reports
+├── reporters/            offline-report.ts (module-wise HTML + CSV with real results, history index)
+├── reports/              committed module-wise reports of every run (index.html, history.json, <module>/)
+├── scripts/              export-test-cases, run-regression, signoff, open-reports, lib/ (test case + report writer)
 ├── test-data/            users, products, expected messages
 ├── tests/                auth · inventory · cart · checkout · api · setup
 └── .github/workflows/    ci.yml
@@ -127,17 +128,43 @@ npm test
 | All quality gates | `npm run check` |
 | Open the reports history | `npm run reports` |
 
-## Reporting
+## Test cases
 
-Every run produces three things, in a folder per module:
+Every automated case is documented before it is coded, in one standard format (see [docs/TEST_CASE_STANDARD.md](docs/TEST_CASE_STANDARD.md) and [docs/TEST_STRATEGY.md](docs/TEST_STRATEGY.md)).
+
+| Item | Where |
+| --- | --- |
+| Test case documents (5, one per module) | [`docs/test-cases/*.md`](docs/test-cases) |
+| Master CSV (regression list, same columns) | `docs/test-cases/*.csv` |
+| Cases | **47**: 20 High, 21 Medium, 6 Low; all automated |
+
+Each case has: **ID** (`TC_<MODULE>_<NN>`, the same ID is in the test title in code), module and sub-module, title, **priority**, **type**
+(Functional, Negative, Validation, Boundary, Security, API ...), preconditions, test data, numbered steps, expected result,
+automation status and spec file, and the **requirement** it traces to (`REQ-...` in the strategy, or the API guide section).
+`npm run cases:check` proves the documents and the code agree 1:1 (IDs, titles, spec files, master CSV); it runs in CI.
+
+## Reports
+
+Every run writes module-wise, self-contained reports (they open without a server). The reports are **committed to the repository**, a new
+file for every run, an old report is never overwritten:
 
 ```
 reports/
-├── index.html                                        history of all runs (newest on top)
+├── index.html                                                  history of all runs, newest on top, links to every module report
+├── history.json
 └── auth/
-    ├── login test cases 17-11-2026_17-04.csv         the cases about to run, with steps and expected results (written BEFORE the run)
-    └── login test 17-11-2026_17-04.html              the report, one file, screenshots embedded
+    ├── Auth test 18-11-2026_12-37-58.html                      HTML report of the module, screenshots embedded
+    └── Auth test cases 18-11-2026_12-37-58.csv                 the cases of the module: steps, expected result and the real result of this run
+    (the same for inventory/, cart/, checkout/, api/)
 ```
+
+| Goal | Command |
+| --- | --- |
+| Generate the reports | `npm test` (the reporter [`reporters/offline-report.ts`](reporters/offline-report.ts) writes them after the run) |
+| Open the history | `npm run reports` |
+
+**Latest committed run: 18-11-2026 12:37:58 (47 of 47 passed)**: open [reports/index.html](reports/index.html) or the module reports, for example
+[Auth](reports/auth), [Inventory](reports/inventory), [Cart](reports/cart), [Checkout](reports/checkout), [API](reports/api).
 
 ![Reports history](docs/images/reports-index.png)
 
@@ -147,7 +174,7 @@ reports/
 
 - `docs/test-cases/<module>-<sub>.md` is the source of truth. `npm run cases:csv` turns it into a **master CSV**; unchanged rows keep their `Last Updated` date.
 - `npm run test:regression` and `npm run test:smoke` build their selection from the master CSV, not from tags in code.
-- `npm run cases:check` fails when a document row has no test, a test ID appears twice, or the CSV is stale. It also runs in CI.
+- `npm run cases:check` fails when a document row has no test (or the reverse), an ID appears twice, a title or spec file differs, or the CSV is stale. It also runs in CI.
 
 ## Sign-off reports
 

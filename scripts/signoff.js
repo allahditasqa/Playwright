@@ -5,7 +5,7 @@
 // and the defect log (docs/defects/<module>.md, optional). A QA engineer reviews the draft and adds the narrative.
 const fs = require('fs');
 const path = require('path');
-const { parseCsv } = require('./export-test-cases.js');
+const { parseCsv, slugify } = require('./lib/test-cases');
 
 const ROOT = path.resolve(__dirname, '..');
 const moduleName = process.argv[2];
@@ -18,7 +18,6 @@ const pretty = (s) => s.replace(/[-_]/g, ' ').replace(/\b\w/g, (c) => c.toUpperC
 const two = (n) => String(n).padStart(2, '0');
 const now = new Date();
 const today = `${two(now.getDate())}-${two(now.getMonth() + 1)}-${now.getFullYear()}`;
-const sortKey = (e) => `${e.date.split('-').reverse().join('')}${e.time}`;
 
 // latest run of every sub-module
 const historyFile = path.join(ROOT, 'reports', 'history.json');
@@ -26,11 +25,25 @@ if (!fs.existsSync(historyFile)) {
   console.log('reports/history.json not found. Run the tests first.');
   process.exit(1);
 }
-const history = JSON.parse(fs.readFileSync(historyFile, 'utf8')).filter((e) => e.module === moduleName);
-const latest = new Map();
-for (const e of history.sort((a, b) => sortKey(b).localeCompare(sortKey(a)) || b.ts.localeCompare(a.ts))) {
-  if (!latest.has(e.sub)) latest.set(e.sub, e);
+// history.json: runs (newest first), each run has one entry per module
+const history = [];
+for (const run of JSON.parse(fs.readFileSync(historyFile, 'utf8'))) {
+  for (const m of run.Modules) {
+    if (slugify(m.Module) !== moduleName) continue;
+    const id = run.RunId; // YYYYMMDD-HHmmss
+    history.push({
+      sub: moduleName,
+      date: `${id.slice(6, 8)}-${id.slice(4, 6)}-${id.slice(0, 4)}`,
+      time: `${id.slice(9, 11)}:${id.slice(11, 13)}:${id.slice(13, 15)}`,
+      total: m.Total,
+      passed: m.Passed,
+      failed: m.Failed,
+      results: m.Results,
+    });
+  }
 }
+const latest = new Map();
+for (const e of history) if (!latest.has(e.sub)) latest.set(e.sub, e);
 if (!latest.size) {
   console.log(`No run found for module "${moduleName}". Run its tests first.`);
   process.exit(1);
@@ -42,9 +55,9 @@ const master = new Map(); // sub-module -> rows
 for (const file of fs.readdirSync(docsDir).filter((f) => f.endsWith('.csv'))) {
   const [, ...rows] = parseCsv(fs.readFileSync(path.join(docsDir, file), 'utf8'));
   for (const r of rows) {
-    if (r[1] !== moduleName) continue;
-    if (!master.has(r[2])) master.set(r[2], []);
-    master.get(r[2]).push(r);
+    if (slugify(r[1]) !== moduleName) continue;
+    if (!master.has(moduleName)) master.set(moduleName, []);
+    master.get(moduleName).push(r);
   }
 }
 
